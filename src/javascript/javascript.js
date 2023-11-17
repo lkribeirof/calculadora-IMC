@@ -9,11 +9,29 @@ form.addEventListener('submit', function(event) {
     const bmi = (weight / (height * height)). toFixed(2);
 
     const value = document.getElementById('value');
-
     let description = '';
+
+    value.classList.add('attention');
 
     document.getElementById('infos').classList.remove('hidden');
 
+    if (bmi < 18.5) {
+        description = 'Cuidado! Você está abaixo do peso!';
+    } else if (bmi >= 18.5 && bmi <= 25) {
+        description = 'Parabéns, você tem um peso ideal!';
+        value.classList.remove('attention');
+        value.classList.add('normal');
+    } else if (bmi > 25 && bmi <= 30) {
+        description = 'Atenção! Você está com sobrepeso.';
+    } else if (bmi > 30 && bmi <= 35) {
+        description = 'Muito cuidado! Obesidade grau I';
+    } else if (bmi > 35 && bmi <= 40) {
+        description = 'Muito grave! Obesidade grau II';
+    } else {
+        description = 'Crítico! Obesidade grau III';
+    }
 
-alert('tabnab')
+
+    value.textContent = bmi.replace('.', ',');
+    document.getElementById('description').textContent = description;
 });
